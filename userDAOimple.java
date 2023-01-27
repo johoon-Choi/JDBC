@@ -165,42 +165,6 @@ public class userDAOimple implements userDAO {
 	} 
 	
 	@Override
-	public void set_auto_increment() {
-		try {
-			conn = DriverManager.getConnection(url, user_id, user_pw);
-			System.out.println("\n #############################");
-			System.out.println(  " # setaut Connection Success #");
-			System.out.println(  " #############################\n");
-
-			pstmt = conn.prepareStatement(SQL_SET_AUTO_INCREMENT);
-
-			rs = pstmt.executeQuery(); // insert, update, delete (DML) ¿ë
-
-			System.out.println("\n ####################################");
-			System.out.println(  " # setaut Prepare Statement success #");
-			System.out.println(  " ####################################\n");
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	} 
-	
-	@Override
 	public userVO selectOne(userVO vo) {
 		// TODO Auto-generated method stub
 		return null;

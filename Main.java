@@ -6,7 +6,7 @@ public class Main {
 		
 		System.out.println(" Delete all! " + mem.deleteAll());
 		System.out.println(" Set auto_increment! ");
-		mem.set_auto_increment();
+		
 		mem.insert(new userVO("johoon", "Suwon", "22264687", "210127"));
 		mem.insert(new userVO("yujeong", "Seoul", "41570430", "960430"));
 		mem.insert(new userVO("wallace", "Kansas", "77777777", "031004"));
