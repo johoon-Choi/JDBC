@@ -18,10 +18,10 @@ public class userDAOimple implements userDAO {
 	private final String user_pw = "hhtad9134";
 	
 	private final String SQL_INSERT = "INSERT INTO USER(num, name, addr, tel, date) VALUES (?, ?, ?, ?, ?)";
-	private final String SQL_UPDATE = "update Member set id = ?, pw = ?, name = ?, tel = ? where num = ?";
+	private final String SQL_UPDATE = "UPDATE MEMBER SET id = ?, pw = ?, name = ?, tel = ? WHERE num = ?";
 	private final String SQL_DELETE = "DELETE FROM user WHERE num = ?";
 	private final String SQL_DELETE_ALL = "DELETE FROM user";
-	private final String SQL_SELECT_ALL = "select * from user";
+	private final String SQL_SELECT_ALL = "SELECT * FROM user";
 	
 	public userDAOimple() {
 		System.out.println("userDAOimple Constuructor()...");
@@ -30,7 +30,7 @@ public class userDAOimple implements userDAO {
 			System.out.println("driver successed...");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		} finally { // 무조건 실행
+		} finally {
 			if (conn != null) {
 				try {
 					conn.close();
@@ -207,9 +207,11 @@ public class userDAOimple implements userDAO {
 			System.out.println("\n #############################");
 			System.out.println(  " # selAll Connection Success #");
 			System.out.println(  " #############################\n");
+			
 			pstmt = conn.prepareStatement(SQL_SELECT_ALL);
 			rs = pstmt.executeQuery();
-			List<userVO> list = new ArrayList<>();
+			
+			List<userVO> ret = new ArrayList<>();
 			
 			while (rs.next()) {
 				int idx = 1;
@@ -220,13 +222,13 @@ public class userDAOimple implements userDAO {
 				String date = rs.getString(idx++);
 				userVO uservo = new userVO(num, name, addr, tel, date);
 
-				list.add(uservo);
+				ret.add(uservo);
 				
 				System.out.println("\n ####################################");
 				System.out.println(  " # selAll Prepare Statement success #");
 				System.out.println(  " ####################################\n");
 			}
-			return list;
+			return ret;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

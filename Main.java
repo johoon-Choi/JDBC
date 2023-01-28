@@ -10,6 +10,6 @@ public class Main {
 		mem.insert(new userVO("yujeong", "Seoul", "41570430", "960430"));
 		mem.insert(new userVO("wallace", "Kansas", "77777777", "031004"));
 		
-		System.out.println(mem.selectAll());
+		System.out.println(" ][][ SELECT_ALL ][]" + mem.selectAll());
 	}
 }
