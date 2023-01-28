@@ -18,7 +18,7 @@ public class userDAOimple implements userDAO {
 	private final String user_pw = "hhtad9134";
 	
 	private final String SQL_INSERT = "INSERT INTO USER(num, name, addr, tel, date) VALUES (?, ?, ?, ?, ?)";
-	private final String SQL_UPDATE = "UPDATE MEMBER SET id = ?, pw = ?, name = ?, tel = ? WHERE num = ?";
+	private final String SQL_UPDATE = "UPDATE USER SET name = ?, addr = ?, tel = ?, date = ? WHERE num = ?";
 	private final String SQL_DELETE = "DELETE FROM user WHERE num = ?";
 	private final String SQL_DELETE_ALL = "DELETE FROM user";
 	private final String SQL_SELECT_ALL = "SELECT * FROM user";
