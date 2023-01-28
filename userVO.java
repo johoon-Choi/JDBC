@@ -12,6 +12,17 @@ public class userVO {
 		this.name = this.addr = this.tel = this.date = "No value";
 	}
 
+	public userVO(int num, String name, String addr, String tel, String date) {
+		super();
+		this.num = num;
+		this.name = name;
+		this.addr = addr;
+		this.tel = tel;
+		this.date = date;
+	}
+
+
+
 	public userVO(String name, String addr, String tel, String date) {
 		super();
 		this.num = 0;
@@ -63,7 +74,8 @@ public class userVO {
 
 	@Override
 	public String toString() {
-		return " UserVO\n\t num=" + num 
+		return "\n [UserVO]"
+				+ "\n\t num=" + num 
 				+ "\n\t name=" + name 
 				+ "\n\t addr=" + addr 
 				+ "\n\t tel=" + tel 

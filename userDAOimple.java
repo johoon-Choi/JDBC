@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class userDAOimple implements userDAO {
@@ -20,10 +21,7 @@ public class userDAOimple implements userDAO {
 	private final String SQL_UPDATE = "update Member set id = ?, pw = ?, name = ?, tel = ? where num = ?";
 	private final String SQL_DELETE = "DELETE FROM user WHERE num = ?";
 	private final String SQL_DELETE_ALL = "DELETE FROM user";
-	private final String SQL_SET_AUTO_INCREMENT = "ALTER TABLE user SET AUTO_INCREMENT = 1";
-	private final String SQL_SELECT_ONE = "select * from member where num = ?";
-	private final String SQL_SELECT_ALL = "select * from member order by num desc limit 5";
-	private final String SQL_SEARCH_LIST = "select * from member where name = ? or tel = ?";
+	private final String SQL_SELECT_ALL = "select * from user";
 	
 	public userDAOimple() {
 		System.out.println("userDAOimple Constuructor()...");
@@ -80,8 +78,40 @@ public class userDAOimple implements userDAO {
 	
 	@Override
 	public int update(userVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
+		int flag = 0;
+		try {
+			conn = DriverManager.getConnection(url, user_id, user_pw);
+			System.out.println("conn successed...");
+			System.out.println("\n #############################");
+			System.out.println(  " # update Connection Success #");
+			System.out.println(  " #############################\n");
+
+			pstmt = conn.prepareStatement(SQL_UPDATE);
+			pstmt.setString(1, vo.getName() + "_update");
+			pstmt.setString(2, vo.getAddr() + "_update");
+			pstmt.setString(3, vo.getTel() + "_update");
+			pstmt.setString(4, vo.getDate() + "_update");
+			pstmt.setInt(5, vo.getNum());
+
+			flag = pstmt.executeUpdate(); // DML용
+
+			System.out.println("\n ####################################");
+			System.out.println(  " # update Prepare Statement success #");
+			System.out.println(  " ####################################\n");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally { // 무조건 실행
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return flag;
 	}
 	
 	@Override
@@ -172,7 +202,35 @@ public class userDAOimple implements userDAO {
 	
 	@Override
 	public List<userVO> selectAll() {
-		// TODO Auto-generated method stub
+		try {
+			conn = DriverManager.getConnection(url, user_id, user_pw);
+			System.out.println("\n #############################");
+			System.out.println(  " # selAll Connection Success #");
+			System.out.println(  " #############################\n");
+			pstmt = conn.prepareStatement(SQL_SELECT_ALL);
+			rs = pstmt.executeQuery();
+			List<userVO> list = new ArrayList<>();
+			
+			while (rs.next()) {
+				int idx = 1;
+				Integer num = rs.getInt(idx++);
+				String name = rs.getString(idx++);
+				String addr = rs.getString(idx++);
+				String tel  = rs.getString(idx++);
+				String date = rs.getString(idx++);
+				userVO uservo = new userVO(num, name, addr, tel, date);
+
+				list.add(uservo);
+				
+				System.out.println("\n ####################################");
+				System.out.println(  " # selAll Prepare Statement success #");
+				System.out.println(  " ####################################\n");
+			}
+			return list;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 }

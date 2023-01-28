@@ -1,4 +1,4 @@
 ### 23.01.27
-- `insert`, `delete` 정의
+- `insert`, `delete`, `delete_all` 정의
 
 ### 20.01.28
